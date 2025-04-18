@@ -14,5 +14,4 @@ Este é um sistema web para cadastro e gerenciamento de manutenções de computa
 Para rodar este projeto localmente, siga os passos abaixo:
 
 1. Clone o repositório para sua máquina local:
-   ```bash
-  http://127.0.0.1:5500/index.html
+   ```bash https://github.com/kailanyguedes/Cadastro-de-manuten-ao

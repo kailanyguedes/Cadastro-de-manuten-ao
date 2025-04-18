@@ -1,0 +1,40 @@
+.floating {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  .btn-efeito:hover {
+    box-shadow: 0 0 12px #00ffff, 0 0 30px #00ffff;
+    transform: scale(1.03);
+    transition: all 0.3s ease;
+  }
+  .text-gradient {
+    background: linear-gradient(90deg, #00f0ff, #ff00ff, #00f0ff);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 4s ease infinite;
+  }
+  
+  @keyframes shine {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .border-glow {
+    border: 2px solid #00ffff;
+    box-shadow: 0 0 15px #00ffff;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .border-glow:hover {
+    box-shadow: 0 0 30px #00ffff, 0 0 60px #00ffff;
+  }
+        

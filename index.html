@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Manutenção</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-900 text-white min-h-screen">
+  <div id="loginSection" class="flex items-center justify-center min-h-screen">
+    <div class="bg-gray-800 p-8 rounded-xl shadow-md w-full max-w-md">
+      <h1 class="text-3xl font-bold mb-6 text-center text-cyan-400">Seja bem-vindo(a)!</h1>
+      <p class="text-center mb-6 text-gray-300">Vamos fazer seu cadastro para acessar a área de manutenção.</p>
+      <form id="loginForm" class="space-y-4">
+        <input type="email" id="email" placeholder="Digite seu e-mail" class="w-full p-3 rounded bg-gray-700 placeholder-gray-400">
+        <input type="password" id="senha" placeholder="Digite sua senha" class="w-full p-3 rounded bg-gray-700 placeholder-gray-400">
+        <div class="text-right">
+          <a href="#" class="text-sm text-cyan-400 hover:underline">Esqueceu a senha?</a>
+        </div>
+        <button type="submit" class="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-3 rounded">Entrar</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="dashboardSection" class="hidden">
+    <header class="bg-gray-800 p-6 shadow-md sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <h1 class="text-2xl font-bold text-cyan-400">Painel de Manutenção</h1>
+        <button onclick="location.reload()" class="text-sm text-cyan-400 hover:underline">Sair</button>
+      </div>
+    </header>
+
+    <main class="p-6 max-w-4xl mx-auto">
+      <section id="cadastro" class="my-12">
+        <h2 class="text-3xl font-bold mb-6 text-center text-cyan-300">Cadastrar Novo Problema</h2>
+        <form id="formCadastro" class="bg-gray-800 p-6 rounded-xl shadow-md space-y-4">
+          <div class="grid md:grid-cols-2 gap-4">
+            <input type="text" id="cliente" placeholder="Nome do Cliente" class="p-3 rounded bg-gray-700 placeholder-gray-400">
+            <input type="text" id="servico" placeholder="Tipo de Problema" class="p-3 rounded bg-gray-700 placeholder-gray-400">
+            <input type="date" id="data" class="p-3 rounded bg-gray-700">
+            <select id="status" class="p-3 rounded bg-gray-700">
+              <option value="Pendente">Pendente</option>
+              <option value="Em andamento">Em andamento</option>
+              <option value="Finalizado">Finalizado</option>
+            </select>
+          </div>
+          <textarea id="descricao" placeholder="Descrição do Problema" rows="4" class="w-full p-3 rounded bg-gray-700 placeholder-gray-400"></textarea>
+          <button type="submit" class="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-3 rounded">Salvar</button>
+        </form>
+      </section>
+
+      <section id="registros" class="my-12">
+        <h2 class="text-3xl font-bold mb-6 text-center text-cyan-300">Problemas Cadastrados</h2>
+        <div id="listaRegistros" class="grid gap-6"></div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const loginSection = document.getElementById('loginSection');
+    const dashboardSection = document.getElementById('dashboardSection');
+
+    loginForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const senha = document.getElementById('senha').value;
+
+      if (email && senha) {
+        loginSection.classList.add('hidden');
+        dashboardSection.classList.remove('hidden');
+      } else {
+        alert('Preencha todos os campos.');
+      }
+    });
+
+    const form = document.getElementById("formCadastro");
+    const lista = document.getElementById("listaRegistros");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const cliente = document.getElementById("cliente").value.trim();
+      const servico = document.getElementById("servico").value.trim();
+      const data = document.getElementById("data").value;
+      const status = document.getElementById("status").value;
+      const descricao = document.getElementById("descricao").value.trim();
+
+      if (!cliente || !servico || !data || !status || !descricao) {
+        alert("Preencha todos os campos!");
+        return;
+      }
+
+      const card = document.createElement("div");
+      card.className = "bg-gray-800 p-5 rounded-lg shadow-lg border border-cyan-600";
+      card.innerHTML = `
+        <h3 class="text-xl font-bold text-cyan-400 mb-2">${cliente}</h3>
+        <p><strong>Problema:</strong> ${servico}</p>
+        <p><strong>Data:</strong> ${data}</p>
+        <p><strong>Status:</strong> ${status}</p>
+        <p><strong>Descrição:</strong> ${descricao}</p>
+      `;
+
+      lista.appendChild(card);
+      form.reset();
+    });
+  </script>
+</body>
+</html>
